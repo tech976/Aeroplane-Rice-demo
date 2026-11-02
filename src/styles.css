@@ -512,8 +512,11 @@ a.filters__pill { text-decoration: none; }
 .markets--compact a:has(.markets__sub) { flex-direction: column; gap: .15rem; }
 .markets--compact .markets__logo--instamart { height: 1.15rem; }
 .markets--compact .markets__sub { font-size: .5625rem; }
-.markets--hero .markets__logo--instamart { height: .9rem; }
-.markets--hero .markets__sub { font-size: .5rem; letter-spacing: .1em; }
+.markets--hero .markets__logo--instamart { height: .8rem; }
+/* on the banner "Instamart" is set as large as the pill allows, so the tile reads Swiggy Instamart */
+.markets--hero .markets__sub { font-size: .6rem; letter-spacing: .03em; }
+.markets--hero a:has(.markets__sub) { padding-inline: .35rem; }
+.markets--hero .markets__logo--amazonfresh { height: 1rem; }
 /* BigBasket's wordmark is small inside its artwork, so it gets a taller slot */
 .markets__logo--bigbasket { height: 3.75rem; margin-block: .125rem; }
 .markets--compact .markets__logo--bigbasket { height: 2.1rem; }

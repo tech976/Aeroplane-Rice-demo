@@ -15,6 +15,12 @@ const marketplaces: { name: string; logo: Shop; search: (q: string) => string }[
   { name: 'Zepto', logo: 'zepto', search: (q) => `https://www.zepto.com/search?query=${q}` },
 ];
 
+// The row over the banner: Amazon Fresh takes Flipkart's place
+const amazonFresh: (typeof marketplaces)[number] = { name: 'Amazon Fresh', logo: 'amazonfresh', search: (q) => `https://www.amazon.in/s?k=${q}&i=nowstore` };
+const heroMarketplaces = marketplaces.flatMap((shop) =>
+  shop.logo === 'flipkart' ? [] : shop.logo === 'amazon' ? [shop, amazonFresh] : [shop],
+);
+
 const Out = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M8 16 17 7M9 7h8v8" />
@@ -27,7 +33,8 @@ const Out = () => (
  */
 export function Marketplaces({ query, productId, compact = false, hero = false }: { query: string; productId?: string; compact?: boolean; hero?: boolean }) {
   const q = encodeURIComponent(query);
-  const shown = productId ? marketplaces.filter((shop) => listingFor(productId, shop.logo)) : marketplaces;
+  const list = hero ? heroMarketplaces : marketplaces;
+  const shown = productId ? list.filter((shop) => listingFor(productId, shop.logo)) : list;
   if (!shown.length) return null;
   const links = shown.map((shop) => {
     const exact = productId ? listingFor(productId, shop.logo) : brandPages[shop.logo] ?? null;
